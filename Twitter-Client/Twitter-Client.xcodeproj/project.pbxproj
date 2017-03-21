@@ -20,16 +20,16 @@
 
 /* Begin PBXFileReference section */
 		F2BA905F1E803F5800FC9B22 /* Twitter-Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter-Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2BA90621E803F5800FC9B22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F2BA90621E803F5800FC9B22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Controller/AppDelegate.swift; sourceTree = "<group>"; };
 		F2BA90671E803F5800FC9B22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2BA90691E803F5800FC9B22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2BA906C1E803F5800FC9B22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2BA906E1E803F5800FC9B22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2BA90741E8052B200FC9B22 /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
-		F2BA90761E8053F200FC9B22 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		F2BA90781E80540F00FC9B22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		F2E1ADFC1E806D7C007D1315 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
-		F2E1ADFE1E807817007D1315 /* HomeTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTimelineViewController.swift; sourceTree = "<group>"; };
+		F2BA90741E8052B200FC9B22 /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = tweet.json; path = "Twitter-Client/Model/tweet.json"; sourceTree = "<group>"; };
+		F2BA90761E8053F200FC9B22 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = Model/Tweet.swift; sourceTree = "<group>"; };
+		F2BA90781E80540F00FC9B22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
+		F2E1ADFC1E806D7C007D1315 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONParser.swift; path = Model/JSONParser.swift; sourceTree = "<group>"; };
+		F2E1ADFE1E807817007D1315 /* HomeTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeTimelineViewController.swift; path = Controller/HomeTimelineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +43,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F23A05FB1E8197A2009B1B0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F2BA90661E803F5800FC9B22 /* Main.storyboard */,
+				F2BA906B1E803F5800FC9B22 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		F23A05FC1E8197FD009B1B0A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2E1ADFE1E807817007D1315 /* HomeTimelineViewController.swift */,
+				F2BA90621E803F5800FC9B22 /* AppDelegate.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F23A05FD1E819809009B1B0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2BA90761E8053F200FC9B22 /* Tweet.swift */,
+				F2BA90781E80540F00FC9B22 /* User.swift */,
+				F2E1ADFC1E806D7C007D1315 /* JSONParser.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F2BA90561E803F5700FC9B22 = {
 			isa = PBXGroup;
 			children = (
@@ -63,14 +91,10 @@
 		F2BA90611E803F5800FC9B22 /* Twitter-Client */ = {
 			isa = PBXGroup;
 			children = (
-				F2BA90761E8053F200FC9B22 /* Tweet.swift */,
-				F2BA90781E80540F00FC9B22 /* User.swift */,
-				F2E1ADFC1E806D7C007D1315 /* JSONParser.swift */,
-				F2BA90621E803F5800FC9B22 /* AppDelegate.swift */,
-				F2BA90661E803F5800FC9B22 /* Main.storyboard */,
-				F2E1ADFE1E807817007D1315 /* HomeTimelineViewController.swift */,
+				F23A05FD1E819809009B1B0A /* Model */,
+				F23A05FC1E8197FD009B1B0A /* Controller */,
+				F23A05FB1E8197A2009B1B0A /* View */,
 				F2BA90691E803F5800FC9B22 /* Assets.xcassets */,
-				F2BA906B1E803F5800FC9B22 /* LaunchScreen.storyboard */,
 				F2BA906E1E803F5800FC9B22 /* Info.plist */,
 			);
 			path = "Twitter-Client";
