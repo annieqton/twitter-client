@@ -14,7 +14,7 @@ class Tweet{
 
     var user: User?  //is a var so it can be changed at a later time
 
-    //failable initializer (using optionals) that can take ni;
+    //failable initializer (using optionals) that can return nil
     init?(json: [String: Any]) {
 
         //since we set it as Any type above, we have to type cast it as string, i.e.   as? String
