@@ -9,41 +9,48 @@
 import UIKit
 
 class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {   //HomeTimelineViewController is subclass of UIViewController
-
+    
     @IBOutlet weak var tableView: UITableView!
     
-        var dataSource = [Tweet]()
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()  // in order to overide a subclass, you need to make a call to super
-        
-         //Lab 6
-        //Assign ViewController.swift to be the dataSource of tableView programmatically.
-        //Assign ViewController.swift to be the delegate of tableView and implement the tableView(_ tableView:, didSelectRowAt indexPath:) method. When a user clicks on a specific cell, print() the indexPath.row to the console.
-        
-        // everytime you use a tableview you need to set the datasource and the delegate
-        self.tableView.dataSource = self
-        self.tableView.delegate = self  //homeview
-
-        JSONParser.tweetsFrom(data: JSONParser.sampleJSONData) { (success, tweets) in
-            
-            if(success){
-                guard let tweets = tweets else { fatalError("Tweets came back nil") }
-                
-                for tweet in tweets{
-                    dataSource.append(tweet)
-                    
-                    //Lab 6: Assign ViewController.swift to be the delegate of tableView and implement the tableView(_ tableView:, didSelectRowAt indexPath:) method. When a user clicks on a specific cell, print() the indexPath.row to the console.
-                }
-            }
-    
+    var dataSource = [Tweet](){
+        didSet {
+            tableView.reloadData()
         }
-
     }
     
     
-    //Lab 6: Assign ViewController.swift to be the delegate of tableView and implement the tableView(_ tableView:, didSelectRowAt indexPath:) method. When a user clicks on a specific cell, print() the indexPath.row to the console.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+//        JSONParser.tweetsFrom(data: JSONParser.sampleJSONData) { (success, tweets) in
+//            
+//            if(success){
+//                guard let tweets = tweets else { fatalError("Tweets came back nil") }
+//                
+//                for tweet in tweets{
+//                    dataSource.append(tweet)
+//                   
+//                }
+//            }
+//            
+//        }
+        update()
+    }
+    
+    func update() {
+        API.shared.getTweets { (tweets) in
+            if tweets != nil{
+                OperationQueue.main.addOperation {
+                    self.dataSource = tweets!
+                }
+            }
+        }
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -67,4 +74,3 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
 }
-
