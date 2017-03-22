@@ -48,7 +48,7 @@ class API {
     }
     
     
-    private func getOAuthUser(callback: @escaping UserCallback){
+    private func getOAuthUser(callback: @escaping UserCallback){ //line 52-64, verifying if user exists in twitter
         let url = URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")
         
         if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){  // parameters is nil
@@ -66,12 +66,22 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
+                // instantiate a user object for our app using the JSON
                 switch response.statusCode {
                 case 200...299:
-                    if let userJSON = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {  //?
-                        let user = User(json: userJSON)
-                        callback(user)
-                    }
+                    JSONParser.userParser(data: data, callback: { (success, user) in
+                        if success {
+                            callback(user)
+                        }
+                    })
+
+                case 400...499:
+                    print("Error comes from client site: \(response.statusCode)")
+                    callback(nil)
+                    
+                case 500...599:
+                    print("Error comes from server-side : \(response.statusCode)")
+                    callback(nil)
                     
                 default:
                     print("Error: response came back with statusCode: \(response.statusCode)")
@@ -86,7 +96,7 @@ class API {
     
     private func updateTimeLine(callback: @escaping TweetsCallback){
         
-        let url = URL(string: "htpps://api.twitter.com/1.1/statuses/home_timeline.json")
+        let url = URL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
         
         if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){
             
@@ -139,7 +149,7 @@ class API {
             })
             
             //how to refactor the else above
-            //self.updateTineLine(callback: callback)  
+            //self.updateTineLine(callback: callback)
             
         }
         
