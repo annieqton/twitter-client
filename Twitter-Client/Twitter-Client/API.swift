@@ -21,7 +21,9 @@ class API {
     var account : ACAccount?
     
     
-    private func login(callback: @escaping AccountCallback){  //closure with one callback is a trailing closure.   this gets the account for user.  this callback is a escaping callback because it escapes the scope of this func to pass the data back.  use @escaping.  this is used in asynch.
+
+    private func login(callback: @escaping AccountCallback){
+
         
         let accountStore = ACAccountStore()
         
@@ -48,16 +50,20 @@ class API {
     }
     
     
-    private func getOAuthUser(callback: @escaping UserCallback){ //line 52-64, verifying if user exists in twitter
+
+    private func getOAuthUser(callback: @escaping UserCallback){
         let url = URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")
         
-        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){  // parameters is nil
+        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){
+
             
             request.account = self.account
             
             request.perform(handler: { (data, response, error) in
                 
-                if let error = error {   //outside of the scope of the response.statusCode
+
+                if let error = error {
+
                     print("Error : \(error)")
                     callback(nil)
                     return
@@ -66,7 +72,9 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-                // instantiate a user object for our app using the JSON
+
+             
+
                 switch response.statusCode {
                 case 200...299:
                     JSONParser.userParser(data: data, callback: { (success, user) in
@@ -113,7 +121,7 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-                //use if statement instead of switch here to demonstrate how to use it here
+
                 if response.statusCode >= 200 && response.statusCode < 300 {
                     JSONParser.tweetsFrom(data: data, callback: { (success, tweets) in
                         if success {
@@ -156,13 +164,4 @@ class API {
     }
     
 }
-
-
-
-
-
-
-
-
-
 
