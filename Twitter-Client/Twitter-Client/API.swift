@@ -21,7 +21,9 @@ class API {
     var account : ACAccount?
     
     
+
     private func login(callback: @escaping AccountCallback){
+
         
         let accountStore = ACAccountStore()
         
@@ -48,16 +50,20 @@ class API {
     }
     
     
+
     private func getOAuthUser(callback: @escaping UserCallback){
         let url = URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")
         
         if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){
+
             
             request.account = self.account
             
             request.perform(handler: { (data, response, error) in
                 
+
                 if let error = error {
+
                     print("Error : \(error)")
                     callback(nil)
                     return
@@ -66,7 +72,9 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-                
+
+             
+
                 switch response.statusCode {
                 case 200...299:
                     JSONParser.userParser(data: data, callback: { (success, user) in
@@ -74,7 +82,7 @@ class API {
                             callback(user)
                         }
                     })
-                    
+
                 case 400...499:
                     print("Error comes from client site: \(response.statusCode)")
                     callback(nil)
@@ -113,7 +121,7 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-                
+
                 if response.statusCode >= 200 && response.statusCode < 300 {
                     JSONParser.tweetsFrom(data: data, callback: { (success, tweets) in
                         if success {
@@ -156,3 +164,4 @@ class API {
     }
     
 }
+
