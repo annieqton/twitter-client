@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F23A05FF1E819EBC009B1B0A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A05FE1E819EBC009B1B0A /* API.swift */; };
 		F2BA90631E803F5800FC9B22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BA90621E803F5800FC9B22 /* AppDelegate.swift */; };
 		F2BA90681E803F5800FC9B22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2BA90661E803F5800FC9B22 /* Main.storyboard */; };
 		F2BA906A1E803F5800FC9B22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2BA90691E803F5800FC9B22 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F23A05FE1E819EBC009B1B0A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F2BA905F1E803F5800FC9B22 /* Twitter-Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter-Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BA90621E803F5800FC9B22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Controller/AppDelegate.swift; sourceTree = "<group>"; };
 		F2BA90671E803F5800FC9B22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		F23A05FD1E819809009B1B0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F23A05FE1E819EBC009B1B0A /* API.swift */,
 				F2BA90761E8053F200FC9B22 /* Tweet.swift */,
 				F2BA90781E80540F00FC9B22 /* User.swift */,
 				F2E1ADFC1E806D7C007D1315 /* JSONParser.swift */,
@@ -178,6 +181,7 @@
 				F2E1ADFD1E806D7C007D1315 /* JSONParser.swift in Sources */,
 				F2BA90771E8053F200FC9B22 /* Tweet.swift in Sources */,
 				F2BA90631E803F5800FC9B22 /* AppDelegate.swift in Sources */,
+				F23A05FF1E819EBC009B1B0A /* API.swift in Sources */,
 				F2E1ADFF1E807817007D1315 /* HomeTimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
