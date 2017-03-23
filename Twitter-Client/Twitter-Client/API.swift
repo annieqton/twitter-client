@@ -21,9 +21,9 @@ class API {
     var account : ACAccount?
     
     
-
+    
     private func login(callback: @escaping AccountCallback){
-
+        
         
         let accountStore = ACAccountStore()
         
@@ -50,20 +50,20 @@ class API {
     }
     
     
-
+    //code demo in lecture today, line 55, 57
     private func getOAuthUser(callback: @escaping UserCallback){
         let url = URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")
         
         if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){
-
+            
             
             request.account = self.account
             
             request.perform(handler: { (data, response, error) in
                 
-
+                
                 if let error = error {
-
+                    
                     print("Error : \(error)")
                     callback(nil)
                     return
@@ -72,9 +72,9 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-
-             
-
+                
+                
+                
                 switch response.statusCode {
                 case 200...299:
                     JSONParser.userParser(data: data, callback: { (success, user) in
@@ -82,7 +82,7 @@ class API {
                             callback(user)
                         }
                     })
-
+                    
                 case 400...499:
                     print("Error comes from client site: \(response.statusCode)")
                     callback(nil)
@@ -102,11 +102,10 @@ class API {
     }
     
     
-    private func updateTimeLine(callback: @escaping TweetsCallback){
+    private func updateTimeLine(url: String, callback: @escaping TweetsCallback){
         
-        let url = URL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
         
-        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: nil){
+        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: URL(string: url), parameters: nil){
             
             request.account = self.account
             
@@ -121,7 +120,7 @@ class API {
                 guard let response = response else { callback(nil); return }
                 guard let data = data else { callback(nil); return }
                 
-
+                
                 if response.statusCode >= 200 && response.statusCode < 300 {
                     JSONParser.tweetsFrom(data: data, callback: { (success, tweets) in
                         if success {
@@ -139,26 +138,33 @@ class API {
         }
     }
     
+    
+    //code demo from lecture today, line 149-156
     func getTweets(callback: @escaping TweetsCallback){
         if self.account == nil {
             
             login(callback: { (account) in
                 if let account = account {
                     self.account = account
-                    self.updateTimeLine(callback: { (tweets) in
-                        callback(tweets)
+                    self.updateTimeLine( url: "https://api.twitter.com/1.1/statuses/home_timeline.json", callback: { (tweets) in callback(tweets)
                     })
                 }
             })
             
         } else {
-            self.updateTimeLine(callback: { (tweets) in  //call updateTimeLine above
-                callback(tweets)
+            self.updateTimeLine(url: "https://api.twitter.com/1.1/statuses/home_timeline.json", callback: { (tweets) in callback(tweets)
             })
             
-            //how to refactor the else above
-            //self.updateTineLine(callback: callback)
-            
+        }
+    }
+    
+    
+    
+    func getTweetsFor(_ user: String, callback: @escaping TweetsCallback) {
+        
+        let urlString = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(user)"
+        
+        self.updateTimeLine(url: urlString) { (tweets) in callback(tweets)
         }
         
     }

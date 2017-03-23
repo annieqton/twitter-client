@@ -13,7 +13,7 @@
         <!--Home Timeline View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeTimelineViewController" customModule="Twitter_Client" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="HomeTimelineViewController" customModule="Twitter_Client" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,12 +26,28 @@
                                 <rect key="frame" x="0.0" y="22" width="375" height="647"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="bSV-LX-vyx">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phorale" translatesAutoresizingMaskIntoConstraints="NO" id="eH2-YX-1pX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="eH2-YX-1pX" secondAttribute="bottom" id="3DF-De-E3L"/>
+                                        <constraint firstItem="eH2-YX-1pX" firstAttribute="top" secondItem="bSV-LX-vyx" secondAttribute="top" id="5Cb-Cu-gWb"/>
+                                        <constraint firstItem="eH2-YX-1pX" firstAttribute="leading" secondItem="bSV-LX-vyx" secondAttribute="leading" id="Nqc-sp-Uom"/>
+                                        <constraint firstAttribute="trailing" secondItem="eH2-YX-1pX" secondAttribute="trailing" id="pyJ-W5-pbM"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" id="3ra-Vh-VxC" customClass="TweetCell" customModule="Twitter_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="155" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ra-Vh-VxC" id="77n-2w-HLQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFv-7P-fY4">
@@ -68,13 +84,7 @@
                             <constraint firstItem="iHW-oT-kU9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ura-jv-WzX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sCf-vL-wZb">
-                        <barButtonItem key="rightBarButtonItem" title="Profile" id="8yj-7M-ftx">
-                            <connections>
-                                <segue destination="lyX-fi-gRj" kind="showDetail" id="rki-fp-X63"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="sCf-vL-wZb"/>
                     <connections>
                         <outlet property="activityIndicator" destination="iHW-oT-kU9" id="7Er-U8-OyC"/>
                         <outlet property="tableView" destination="1ZH-tU-rz8" id="O2J-vd-ArS"/>
@@ -82,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="34.632683658170919"/>
+            <point key="canvasLocation" x="965.60000000000002" y="34.632683658170919"/>
         </scene>
         <!--Tweet Detail View Controller-->
         <scene sceneID="WbF-HV-91a">
@@ -248,4 +258,7 @@
             <point key="canvasLocation" x="24.800000000000001" y="34.632683658170919"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="phorale" width="213" height="160"/>
+    </resources>
 </document>
