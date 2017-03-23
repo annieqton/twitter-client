@@ -30,9 +30,11 @@ class ProfileViewController: UIViewController {
         
         
         //display user info
-//        self.name.text = self.name.text
-//        self.profileImageURL.text = self.profileImageURL.text
-//        self.location.text = self.location.text
-//        
+        self.name.text = self.name.text
+        self.profileImageURL.text = self.profileImageURL.text
+        self.location.text = self.location.text
+
     }
 }
+
+
