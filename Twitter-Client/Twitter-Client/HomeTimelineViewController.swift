@@ -12,6 +12,9 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     var dataSource = [Tweet](){
         didSet {
             tableView.reloadData()
@@ -22,35 +25,49 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        self.navigationItem.title = "My Timeline"
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
-//        JSONParser.tweetsFrom(data: JSONParser.sampleJSONData) { (success, tweets) in
-//            
-//            if(success){
-//                guard let tweets = tweets else { fatalError("Tweets came back nil") }
-//                
-//                for tweet in tweets{
-//                    dataSource.append(tweet)
-//                   
-//                }
-//            }
-//            
-//        }
         update()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "showDetailSegue" {
+            
+            if let selectedIndex = self.tableView.indexPathForSelectedRow?.row{
+                let selectedTweet = self.dataSource[selectedIndex]
+                
+                guard let destinationController = segue.destination as? TweetDetailViewController else { return }
+                
+                destinationController.tweet = selectedTweet
+                
+            }
+        }
+        
+    }
+    
+
+    
     func update() {
+        
+        self.activityIndicator.startAnimating()
+        
         API.shared.getTweets { (tweets) in
             if tweets != nil{
                 OperationQueue.main.addOperation {
                     self.dataSource = tweets!
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -59,18 +76,14 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tweetToDisplay = dataSource[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath)
         
-        cell.textLabel?.text = tweetToDisplay.text
-        cell.detailTextLabel?.text = tweetToDisplay.user?.name
+        if let cell = cell as? TweetCell{
+            cell.tweetText.text = dataSource[indexPath.row].text
+        }
+        
         return cell
     }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        print("\(indexPath.row)")
-        
-    }
+
     
 }

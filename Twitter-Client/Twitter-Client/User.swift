@@ -25,7 +25,7 @@ class User{
             self.location  = location
             
         } else {
-            return nil  //another option is before returning nil, print which one errors out (i.e. name, profileImageURL or location)
+            return nil
         }
     }
     

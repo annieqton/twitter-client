@@ -47,13 +47,6 @@ class JSONParser {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
     class func tweetsFrom(data: Data, callback: JSONParserCallback){
         
         do {

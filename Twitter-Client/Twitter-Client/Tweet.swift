@@ -11,6 +11,8 @@ import Foundation
 class Tweet{
     let text: String
     let id: String
+    let retweetedStatus: Bool
+    
     
     var user: User?  //is a var so it can be changed at a later time
     
@@ -25,6 +27,16 @@ class Tweet{
             
             if let userDictionary = json["user"] as? [String: Any] {  //if this fails then we
                 self.user = User(json: userDictionary)               // have a nil user with a valid tweet
+            }
+            
+            if (json["retweeted_status"] == nil) {
+                self.retweetedStatus = false
+                print("Not a retweet")
+                return
+            }else {
+                self.retweetedStatus = true
+                print("Retweet")
+                return
             }
             
         } else {
