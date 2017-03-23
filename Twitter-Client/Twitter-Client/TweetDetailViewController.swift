@@ -29,6 +29,7 @@ class TweetDetailViewController: UIViewController {
         
         self.tweetTextLabel.text = self.tweet.text
         
+        
         if self.tweet.retweetedStatus {
             self.retweetStatusLabel.text = "This is a retweet"
             self.retweetStatusView.backgroundColor = UIColor.yellow

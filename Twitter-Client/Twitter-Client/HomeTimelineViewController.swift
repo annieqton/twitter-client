@@ -8,11 +8,19 @@
 
 import UIKit
 
+
 class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {   //HomeTimelineViewController is subclass of UIViewController
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBAction func ProfileButtonPressed(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "ProfileViewControllerSegue", sender: sender)
+        
+        
+        
+    }
     
     
     var dataSource = [Tweet](){
@@ -29,27 +37,32 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        let tweetNib = UINib(nibName: "TweetNibCell", bundle: nil)  //nil means bundle.main here
+        
+        self.tableView.register(tweetNib, forCellReuseIdentifier: TweetNibCell.identifier)
+        
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         update()
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if segue.identifier == "showDetailSegue" {
+        if segue.identifier == TweetDetailViewController.identifier {
             
-            if let selectedIndex = self.tableView.indexPathForSelectedRow?.row{
-                let selectedTweet = self.dataSource[selectedIndex]
+                let selectedIndex = tableView.indexPathForSelectedRow!.row
+                let selectedTweet = dataSource[selectedIndex]
                 
-                guard let destinationController = segue.destination as? TweetDetailViewController else { return }
-                
+            if let destinationController = segue.destination as? TweetDetailViewController {
                 destinationController.tweet = selectedTweet
                 
             }
-            
         }
+        
         
     }
     
@@ -77,14 +90,19 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TweetNibCell.identifier, for: indexPath) as! TweetNibCell
         
-        if let cell = cell as? TweetCell{
-            cell.tweetText.text = dataSource[indexPath.row].text
-        }
+        let tweet = self.dataSource[indexPath.row]
+            cell.tweet = tweet
         
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {  //if click on the tweet, this will lead to another screen to show the user, image, and tweet details
+        
+        self.performSegue(withIdentifier: TweetDetailViewController.identifier, sender: nil)
+        
+        
+    }
     
 }

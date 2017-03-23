@@ -24,11 +24,18 @@ extension UIImage {  //taking any imge url and return an image.  fetch image wit
                 OperationQueue.main.addOperation {
                     callback(image)
                 }
-            }
-            
-            OperationQueue.main.addOperation {
-                callback(nil)
+            } else {
+                OperationQueue.main.addOperation {
+                    callback(nil)
+                }
             }
         }
+    }
+}
+
+
+extension UIResponder {                  //parent class of all UIView.  UIViewController comes back and inherits from UIView
+    static var identifier: String {     //static means applies to the type, not the instance
+        return String(describing: self)
     }
 }

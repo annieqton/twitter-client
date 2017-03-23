@@ -166,6 +166,14 @@ class API {
         
         self.updateTimeLine(url: urlString) { (tweets) in callback(tweets)
         }
+    }
+    
+    
+    func getUserInfo(callback: @escaping UserCallback) {
+        getOAuthUser { (user) in
+            callback(user)
+        }
+        
         
     }
     
