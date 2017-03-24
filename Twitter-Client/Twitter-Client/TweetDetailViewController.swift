@@ -20,6 +20,13 @@ class TweetDetailViewController: UIViewController {
     
     @IBOutlet weak var retweetStatusLabel: UILabel!
     
+    //View Feed button
+    @IBAction func viewFeedButton(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "ViewFeedViewControllerSegue", sender: sender)
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,15 +36,46 @@ class TweetDetailViewController: UIViewController {
         
         self.tweetTextLabel.text = self.tweet.text
         
+        
         if self.tweet.retweetedStatus {
-            self.retweetStatusLabel.text = "This is a retweet"
+            self.retweetStatusLabel.text = "Retweet"
             self.retweetStatusView.backgroundColor = UIColor.yellow
         } else {
-            self.retweetStatusLabel.text = "This is not a retweet"
+            self.retweetStatusLabel.text = "Not a retweet"
             self.retweetStatusView.backgroundColor = UIColor.cyan
         }
+        
+        //if user is unknown, then disable the View Feed button
+        if self.user.name == "Unknown" {
+            let viewFeedButton = nil
+        }
+        
+        
     }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //another way of doing this
 

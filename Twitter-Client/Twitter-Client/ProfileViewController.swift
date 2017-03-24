@@ -22,18 +22,20 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = "Profile"
         
-        //still need code here
-        //if user log in through getOAuthUser is true, then display the user information. else display error message
-        
-        
-        //display user info
-        self.name.text = self.name.text
-        self.profileImageURL.text = self.profileImageURL.text
-        self.location.text = self.location.text
-
+        API.shared.getUserInfo { (fetchedUser) in
+            self.user = fetchedUser
+            
+            OperationQueue.main.addOperation {  //add this to address asynch issue.  line 33-35 were moved inside
+            
+                self.name.text = self.user.name
+                self.profileImageURL.text = self.user.profileImageURL
+                self.location.text = self.user.location
+            
+            }
+        }
     }
 }
 
