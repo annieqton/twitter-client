@@ -17,7 +17,7 @@ class User{
     let screenName: String
     
     init?(json: [String: Any]) {
-        //print(json)
+//        print(json)
         
         if let name = json["name"] as? String,
             let profileImageURL = json["profile_image_url_https"] as? String,

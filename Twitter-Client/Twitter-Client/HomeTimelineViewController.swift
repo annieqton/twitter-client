@@ -18,8 +18,6 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     @IBAction func ProfileButtonPressed(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "ProfileViewControllerSegue", sender: sender)
         
-        
-        
     }
     
     
@@ -83,9 +81,11 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
+    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,6 +98,8 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
 
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {  //if click on the tweet, this will lead to another screen to show the user, image, and tweet details
         
         self.performSegue(withIdentifier: TweetDetailViewController.identifier, sender: nil)
