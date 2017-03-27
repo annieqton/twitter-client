@@ -20,22 +20,22 @@ class TweetDetailViewController: UIViewController {
     
     @IBOutlet weak var retweetStatusLabel: UILabel!
     
-    //View Feed button
-    @IBAction func viewFeedButton(_ sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "ViewFeedViewControllerSegue", sender: sender)
-        
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = "Tweet Details"
         
+        self.navigationController?.navigationBar.tintColor = UIColor.purple  //to set navigation item text to a different color
+        
+//        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray //set nav bar to a diff color. can also in main.storyboard
+        
+        
         self.userNameLabel.text = self.tweet.user?.name ?? "Unknown"
         
         self.tweetTextLabel.text = self.tweet.text
         
+        print("User screenname is: \(tweet.user?.screenName)")
         
         if self.tweet.retweetedStatus {
             self.retweetStatusLabel.text = "Retweet"
@@ -44,10 +44,19 @@ class TweetDetailViewController: UIViewController {
             self.retweetStatusLabel.text = "Not a retweet"
             self.retweetStatusView.backgroundColor = UIColor.cyan
         }
+   
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         
-        //if user is unknown, then disable the View Feed button
-        if self.user.name == "Unknown" {
-            let viewFeedButton = nil
+        if segue.identifier == "UserFeedViewControllerSegue" {
+            
+            let tweetUser = tweet.user
+            
+            if let destinationController = segue.destination as? UserFeedViewController {
+                destinationController.newUser = tweetUser
+            }
         }
         
         

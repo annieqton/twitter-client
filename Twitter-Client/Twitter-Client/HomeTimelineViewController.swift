@@ -61,7 +61,6 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         
-        
     }
     
 
